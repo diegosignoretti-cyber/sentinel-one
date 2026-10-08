@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Dossier Riservato — One-Pager a 4 Quadranti</title>
+<style>
+  /* ---------------------------------------------------------------
+     DOSSIER RISERVATO — foglio singolo A4, una sola facciata.
+     Stampa consigliata: cartoncino 120–160 g, colore, bordi al vivo.
+     Un file = un dirigente. Duplica il file e compila i campi {{...}}.
+     I dati qui dentro sono SEGNAPOSTO FITTIZI di esempio.
+     --------------------------------------------------------------- */
+
+  :root{
+    --inchiostro:#1a1a1a;
+    --grigio:#555;
+    --linea:#c9c4b8;
+    --rosso:#b11313;
+    --sfondo:#ffffff;
+    --kraft:#f4efe4;
+  }
+  @page{ size:A4; margin:12mm; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#e7e3da; }
+  body{
+    font-family:"Georgia","Times New Roman",serif;
+    color:var(--inchiostro);
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+  .foglio{
+    width:210mm; min-height:297mm; margin:0 auto; padding:14mm 14mm 12mm;
+    background:var(--sfondo); position:relative;
+  }
+  @media screen{ .foglio{ margin:16px auto; box-shadow:0 2px 18px rgba(0,0,0,.25); } }
+
+  /* ---- Timbro riservato ---- */
+  .timbro{
+    position:absolute; top:10mm; right:12mm;
+    border:2.5px solid var(--rosso); color:var(--rosso);
+    font-family:"Courier New",monospace; font-weight:bold;
+    font-size:9.5px; letter-spacing:.5px; line-height:1.25;
+    padding:5px 8px; transform:rotate(3deg); text-align:center;
+    max-width:62mm;
+  }
+
+  /* ---- Intestazione ---- */
+  .testata{ border-bottom:3px double var(--inchiostro); padding-bottom:8px; margin-bottom:10px; max-width:118mm; }
+  .eyebrow{ font-family:"Courier New",monospace; font-size:10px; letter-spacing:2px; color:var(--grigio); text-transform:uppercase; }
+  h1{ font-size:21px; margin:4px 0 2px; letter-spacing:.3px; }
+  h1 .sub{ display:block; font-size:12px; font-weight:normal; color:var(--grigio); letter-spacing:.5px; }
+
+  .scheda-id{
+    font-family:"Courier New",monospace; font-size:11px; line-height:1.55;
+    background:var(--kraft); border:1px solid var(--linea);
+    padding:8px 10px; margin:10px 0 14px; max-width:118mm;
+  }
+  .scheda-id b{ display:inline-block; width:34mm; color:var(--grigio); font-weight:bold; }
+  .liv-critico{ color:var(--rosso); font-weight:bold; }
+
+  /* ---- Griglia 4 quadranti ---- */
+  .griglia{ display:grid; grid-template-columns:1fr 1fr; gap:0; border:1.5px solid var(--inchiostro); }
+  .q{ padding:10px 12px 12px; border:0.75px solid var(--linea); min-height:62mm; }
+  .q-tit{
+    font-family:"Courier New",monospace; font-size:11px; font-weight:bold;
+    letter-spacing:.5px; text-transform:uppercase; margin:0 0 7px;
+    padding-bottom:4px; border-bottom:1.5px solid var(--inchiostro);
+    display:flex; align-items:baseline; gap:6px;
+  }
+  .q-tit .n{ color:var(--rosso); }
+  .q ul{ margin:0; padding-left:16px; }
+  .q li{ font-size:12px; line-height:1.5; margin-bottom:5px; }
+  .q li .et{ font-weight:bold; }
+  .mono{ font-family:"Courier New",monospace; font-size:11px; background:var(--kraft); padding:0 3px; }
+
+  /* Quadrante 4 — vettore d'attacco, risalto */
+  .q.vettore{ background:#fbf3f3; }
+  .q.vettore .q-tit{ color:var(--rosso); border-color:var(--rosso); }
+  .vettore-tipo{ font-size:11px; font-weight:bold; color:var(--rosso); margin:0 0 6px; }
+  .vettore-scen{ font-size:11.5px; line-height:1.5; font-style:italic; margin:0 0 7px; }
+  .vettore-perdita{
+    font-family:"Courier New",monospace; font-size:11px; font-weight:bold;
+    border:1px dashed var(--rosso); color:var(--rosso); padding:4px 6px; display:inline-block;
+  }
+
+  /* ---- Pie' di pagina ---- */
+  .pie{
+    margin-top:12px; padding-top:7px; border-top:1px solid var(--linea);
+    font-size:9.5px; color:var(--grigio); display:flex; justify-content:space-between; gap:12px;
+  }
+  .pie .nota{ max-width:120mm; }
+
+  /* Barra di comando stampa (solo a schermo) */
+  .barra{ max-width:210mm; margin:14px auto 0; text-align:center; }
+  .barra button{ font-family:inherit; font-size:14px; padding:8px 20px; cursor:pointer; }
+  @media print{ .barra{ display:none; } body{ background:#fff; } }
+</style>
+</head>
+<body>
+
+<div class="foglio">
+
+  <!-- Timbro angolo alto destro -->
+  <div class="timbro">
+    STRETTAMENTE CONFIDENZIALE<br>
+    AD ESCLUSIVO USO DEL DESTINATARIO
+  </div>
+
+  <!-- Intestazione -->
+  <header class="testata">
+    <div class="eyebrow">Operational Security Audit</div>
+    <h1>Digital Footprint &amp; Threat Exposure
+      <span class="sub">Esposizione informativa pubblica — figura apicale</span>
+    </h1>
+  </header>
+
+  <!-- Blocco identificativo scheda -->
+  <div class="scheda-id">
+    <div><b>TARGET PROFILE</b> {{RUOLO_E_NOME — es. Amministratore Delegato — M. Rossi}}</div>
+    <div><b>CODICE ASSET</b> {{ES. TARGET-01 / CEO-SUITE}}</div>
+    <div><b>DATA RILIEVO</b> {{DATA DELLA RIUNIONE}}</div>
+    <div><b>LIVELLO ESPOSIZIONE</b> <span class="liv-critico">{{CRITICO / ALTO / ELEVATO}}</span></div>
+    <div><b>STATO</b> CLASSIFICATO AD USO INTERNO</div>
+  </div>
+
+  <!-- Griglia 4 quadranti -->
+  <section class="griglia">
+
+    <!-- Q1 -->
+    <div class="q">
+      <div class="q-tit"><span class="n">1.</span> Identity &amp; Exposure Summary</div>
+      <ul>
+        <li><span class="et">Foto &amp; profilo pubblico:</span> {{fonte foto ufficiale — es. profilo LinkedIn / intervista stampa}}</li>
+        <li><span class="et">Email esposta:</span> aziendale <span class="mono">{{nome.cognome@azienda.com}}</span> · personale nota {{sì/no}}</li>
+        <li><span class="et">Data breach storici:</span> {{es. LinkedIn 2016, Dropbox 2012}} — password <span class="mono">A***201*!</span> <em>(sempre mascherata)</em></li>
+        <li><span class="et">Dati societari pubblici:</span> {{es. cariche da visura camerale, firma su bilanci pubblicati}}</li>
+      </ul>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q">
+      <div class="q-tit"><span class="n">2.</span> Recent Activity &amp; Movements</div>
+      <ul>
+        <li><span class="et">Spostamenti documentati:</span> {{es. presenza a fiera di settore, sede e date da post pubblico}}</li>
+        <li><span class="et">Finestre di assenza:</span> {{es. trasferta 14–17 del mese, reperibilità ridotta}}</li>
+        <li><span class="et">Abitudini orarie / fuso:</span> {{es. fuso orario diverso in trasferta}}</li>
+        <li><span class="et">Evidenza chiave:</span> <em>{{una riga che collega lo spostamento alla finestra di rischio}}</em></li>
+      </ul>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q">
+      <div class="q-tit"><span class="n">3.</span> Network &amp; Workflow Hooks</div>
+      <ul>
+        <li><span class="et">Fornitori / partner citati:</span> {{es. 3 fornitori reali identificati da case study / post pubblici}}</li>
+        <li><span class="et">Software &amp; applicativi noti:</span> {{es. ERP/gestionale desunto da profili o annunci}}</li>
+        <li><span class="et">Deleghe &amp; assistenti:</span> {{nome assistente o referente, desunto da fonti pubbliche}}</li>
+        <li><span class="et">Flusso documentale:</span> {{es. percorso di rete trapelato dai metadati di un PDF pubblico}}</li>
+      </ul>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q vettore">
+      <div class="q-tit"><span class="n">4.</span> Vettore d'Attacco Potenziale</div>
+      <p class="vettore-tipo">{{TIPO — es. CEO Fraud / BEC su bonifico d'urgenza}}</p>
+      <p class="vettore-scen">{{Scenario in 3 passi, difensivo e sintetico: come le informazioni dei quadranti 1–3, combinate, aprirebbero una finestra di frode. Formulato come illustrazione del rischio, non come istruzione operativa.}}</p>
+      <span class="vettore-perdita">PERDITA POTENZIALE STIMATA: {{es. € 65.000 — € 150.000}}</span>
+    </div>
+
+  </section>
+
+  <!-- Pie' di pagina -->
+  <footer class="pie">
+    <div class="nota">
+      Documento prodotto con metodologia di <b>audit passivo</b> su fonti pubbliche e indicizzate.
+      Nessun sistema è stato violato. Dati intimi/familiari/sanitari esclusi per policy.
+    </div>
+    <div>Pag. 1/1 · {{SIGLA AUDITOR}}</div>
+  </footer>
+
+</div>
+
+<div class="barra">
+  <button onclick="window.print()">Stampa / Salva come PDF</button>
+</div>
+
+</body>
+</html>

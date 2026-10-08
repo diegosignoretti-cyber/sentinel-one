@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Etichetta Busta — Dossier Riservato</title>
+<style>
+  /* Etichetta per la copertina della busta (A4/C5 kraft o grigio istituzionale).
+     Stampare su etichetta adesiva o foglio da applicare. Un file = un dirigente. */
+  :root{ --inchiostro:#1a1a1a; --rosso:#b11313; --linea:#c9c4b8; --kraft:#f4efe4; }
+  @page{ size:A4; margin:16mm; }
+  html,body{ margin:0; background:#e7e3da; font-family:"Georgia",serif; color:var(--inchiostro); }
+  body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .etichetta{
+    width:150mm; margin:24px auto; background:var(--kraft);
+    border:1.5px solid var(--inchiostro); padding:16mm 14mm; position:relative;
+  }
+  @media screen{ .etichetta{ box-shadow:0 2px 16px rgba(0,0,0,.2); } }
+  .riservato{
+    font-family:"Courier New",monospace; font-weight:bold; color:var(--rosso);
+    font-size:15px; letter-spacing:1px; text-align:right; line-height:1.4;
+    border-bottom:2px solid var(--rosso); padding-bottom:8px; margin-bottom:22mm;
+  }
+  .dest-label{ font-family:"Courier New",monospace; font-size:11px; letter-spacing:2px; color:#555; text-transform:uppercase; }
+  .nome{ font-size:30px; font-weight:bold; margin:4px 0 2px; }
+  .qualifica{ font-size:15px; color:#333; margin-bottom:24mm; }
+  .sigillo{
+    position:absolute; bottom:14mm; left:14mm;
+    font-family:"Courier New",monospace; font-size:12px; letter-spacing:2px;
+    border:1.5px solid var(--inchiostro); padding:5px 10px;
+  }
+  .foglio-nota{ position:absolute; bottom:14mm; right:14mm; font-size:10px; color:#555; font-style:italic; }
+  @media print{ html,body{ background:#fff; } }
+</style>
+</head>
+<body>
+  <div class="etichetta">
+    <div class="riservato">STRETTAMENTE RISERVATO<br>AD ESCLUSIVO USO DEL DESTINATARIO</div>
+    <div class="dest-label">Destinatario</div>
+    <div class="nome">{{NOME E COGNOME}}</div>
+    <div class="qualifica">{{QUALIFICA UFFICIALE — es. Amministratore Delegato}}</div>
+    <div class="sigillo">EVIDENCE / SEALED</div>
+    <div class="foglio-nota">Non aprire prima della riunione</div>
+  </div>
+</body>
+</html>
