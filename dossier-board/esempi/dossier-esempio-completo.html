@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Dossier Riservato — Caso dimostrativo (dati fittizi)</title>
+<style>
+  /* ================================================================
+     CASO DIMOSTRATIVO — DATI INTERAMENTE FITTIZI
+     Azienda, persone, fornitori, domini e importi sono inventati.
+     Serve a mostrare al board il formato finito di un dossier.
+     4 fogli A4, uno per figura apicale. Stampa: cartoncino 120-160 g.
+     ================================================================ */
+  :root{
+    --inchiostro:#1a1a1a; --grigio:#555; --linea:#c9c4b8;
+    --rosso:#b11313; --sfondo:#fff; --kraft:#f4efe4;
+  }
+  @page{ size:A4; margin:12mm; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:#e7e3da; }
+  body{ font-family:"Georgia","Times New Roman",serif; color:var(--inchiostro);
+    -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+  .foglio{ width:210mm; min-height:297mm; margin:0 auto; padding:14mm 14mm 12mm;
+    background:var(--sfondo); position:relative; overflow:hidden; }
+  .foglio + .foglio{ page-break-before:always; }
+  @media screen{ .foglio{ margin:16px auto; box-shadow:0 2px 18px rgba(0,0,0,.25); } }
+
+  /* Filigrana "caso dimostrativo" */
+  .filigrana{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    pointer-events:none; z-index:0; }
+  .filigrana span{ font-family:"Courier New",monospace; font-weight:bold; font-size:42px;
+    color:rgba(177,19,19,.07); transform:rotate(-28deg); letter-spacing:6px; white-space:nowrap; text-align:center; line-height:1.6; }
+  .foglio > *:not(.filigrana){ position:relative; z-index:1; }
+
+  .demo-bar{ background:var(--rosso); color:#fff; font-family:"Courier New",monospace;
+    font-size:10px; letter-spacing:1.5px; text-align:center; padding:4px; margin:-14mm -14mm 10px; }
+
+  .timbro{ position:absolute; top:16mm; right:12mm; border:2.5px solid var(--rosso); color:var(--rosso);
+    font-family:"Courier New",monospace; font-weight:bold; font-size:9.5px; letter-spacing:.5px;
+    line-height:1.25; padding:5px 8px; transform:rotate(3deg); text-align:center; max-width:62mm; z-index:2; }
+
+  .testata{ border-bottom:3px double var(--inchiostro); padding-bottom:8px; margin-bottom:10px; max-width:118mm; }
+  .eyebrow{ font-family:"Courier New",monospace; font-size:10px; letter-spacing:2px; color:var(--grigio); text-transform:uppercase; }
+  h1{ font-size:21px; margin:4px 0 2px; letter-spacing:.3px; }
+  h1 .sub{ display:block; font-size:12px; font-weight:normal; color:var(--grigio); letter-spacing:.5px; }
+
+  .scheda-id{ font-family:"Courier New",monospace; font-size:11px; line-height:1.55;
+    background:var(--kraft); border:1px solid var(--linea); padding:8px 10px; margin:10px 0 14px; max-width:118mm; }
+  .scheda-id b{ display:inline-block; width:36mm; color:var(--grigio); font-weight:bold; }
+  .liv-critico{ color:var(--rosso); font-weight:bold; }
+
+  .griglia{ display:grid; grid-template-columns:1fr 1fr; gap:0; border:1.5px solid var(--inchiostro); }
+  .q{ padding:10px 12px 12px; border:0.75px solid var(--linea); min-height:62mm; }
+  .q-tit{ font-family:"Courier New",monospace; font-size:11px; font-weight:bold; letter-spacing:.5px;
+    text-transform:uppercase; margin:0 0 7px; padding-bottom:4px; border-bottom:1.5px solid var(--inchiostro);
+    display:flex; align-items:baseline; gap:6px; }
+  .q-tit .n{ color:var(--rosso); }
+  .q ul{ margin:0; padding-left:16px; }
+  .q li{ font-size:12px; line-height:1.5; margin-bottom:5px; }
+  .q li .et{ font-weight:bold; }
+  .mono{ font-family:"Courier New",monospace; font-size:11px; background:var(--kraft); padding:0 3px; }
+
+  .q.vettore{ background:#fbf3f3; }
+  .q.vettore .q-tit{ color:var(--rosso); border-color:var(--rosso); }
+  .vettore-tipo{ font-size:11px; font-weight:bold; color:var(--rosso); margin:0 0 6px; }
+  .vettore-scen{ font-size:11.5px; line-height:1.5; font-style:italic; margin:0 0 7px; }
+  .vettore-perdita{ font-family:"Courier New",monospace; font-size:11px; font-weight:bold;
+    border:1px dashed var(--rosso); color:var(--rosso); padding:4px 6px; display:inline-block; }
+
+  .pie{ margin-top:12px; padding-top:7px; border-top:1px solid var(--linea); font-size:9.5px; color:var(--grigio);
+    display:flex; justify-content:space-between; gap:12px; }
+  .pie .nota{ max-width:120mm; }
+
+  .barra{ max-width:210mm; margin:14px auto 0; text-align:center; }
+  .barra button{ font-family:inherit; font-size:14px; padding:8px 20px; cursor:pointer; }
+  @media print{ .barra{ display:none; } body{ background:#fff; } }
+</style>
+</head>
+<body>
+
+<!-- ================= FOGLIO 1 — CEO ================= -->
+<div class="foglio">
+  <div class="filigrana"><span>CASO DIMOSTRATIVO<br>DATI FITTIZI</span></div>
+  <div class="demo-bar">CASO DIMOSTRATIVO — AZIENDA, PERSONE E DATI INTERAMENTE FITTIZI — MERIDIANA COMPONENTI S.P.A.</div>
+  <div class="timbro">STRETTAMENTE CONFIDENZIALE<br>AD ESCLUSIVO USO DEL DESTINATARIO</div>
+
+  <header class="testata">
+    <div class="eyebrow">Operational Security Audit</div>
+    <h1>Digital Footprint &amp; Threat Exposure
+      <span class="sub">Esposizione informativa pubblica — figura apicale</span>
+    </h1>
+  </header>
+
+  <div class="scheda-id">
+    <div><b>TARGET PROFILE</b> Amministratore Delegato — E. Fabbri</div>
+    <div><b>CODICE ASSET</b> TARGET-01 / CEO-SUITE</div>
+    <div><b>DATA RILIEVO</b> 21 ottobre 2026</div>
+    <div><b>LIVELLO ESPOSIZIONE</b> <span class="liv-critico">CRITICO</span></div>
+    <div><b>STATO</b> CLASSIFICATO AD USO INTERNO</div>
+  </div>
+
+  <section class="griglia">
+    <div class="q">
+      <div class="q-tit"><span class="n">1.</span> Identity &amp; Exposure Summary</div>
+      <ul>
+        <li><span class="et">Foto &amp; profilo:</span> foto ufficiale da profilo LinkedIn pubblico e da comunicato stampa fiera 2025.</li>
+        <li><span class="et">Email esposta:</span> personale <span class="mono">e.fabbri@—mail.it</span> comparsa in contatti pubblici.</li>
+        <li><span class="et">Data breach storici:</span> LinkedIn 2016 e Dropbox 2012 — password <span class="mono">E***br9!</span> <em>(mascherata)</em>.</li>
+        <li><span class="et">Dati societari:</span> carica di AD e consigliere in 2 controllate, da visura camerale pubblica.</li>
+      </ul>
+    </div>
+    <div class="q">
+      <div class="q-tit"><span class="n">2.</span> Recent Activity &amp; Movements</div>
+      <ul>
+        <li><span class="et">Spostamenti:</span> post pubblico «in partenza per Hannover Messe, 20–24 aprile».</li>
+        <li><span class="et">Finestra di assenza:</span> 4 giorni fuori sede, agenda fieristica fitta.</li>
+        <li><span class="et">Abitudini orarie:</span> reperibilità telefonica ridotta durante gli slot espositivi.</li>
+        <li><span class="et">Evidenza:</span> <em>la finestra di assenza e la reperibilità ridotta risultano pubbliche e databili.</em></li>
+      </ul>
+    </div>
+    <div class="q">
+      <div class="q-tit"><span class="n">3.</span> Network &amp; Workflow Hooks</div>
+      <ul>
+        <li><span class="et">Deleghe &amp; assistente:</span> assistente esecutiva S. Donati, desunta da ringraziamenti pubblici su LinkedIn.</li>
+        <li><span class="et">Firma:</span> firma autografa scansionata presente in un bilancio PDF pubblicato.</li>
+        <li><span class="et">Relazioni:</span> rapporti con 2 controllate citate nelle note integrative.</li>
+        <li><span class="et">Flusso:</span> autorizzazioni straordinarie passano formalmente dall'AD.</li>
+      </ul>
+    </div>
+    <div class="q vettore">
+      <div class="q-tit"><span class="n">4.</span> Vettore d'Attacco Potenziale</div>
+      <p class="vettore-tipo">CEO Fraud / BEC su bonifico d'urgenza</p>
+      <p class="vettore-scen">Durante la fiera, con l'AD poco reperibile e l'assenza nota pubblicamente, una mail che impersona l'AD chiede al CFO un acconto riservato verso un nuovo IBAN estero per un «accordo societario»: in assenza di verifica telefonica fuori banda, il pagamento parte.</p>
+      <span class="vettore-perdita">PERDITA POTENZIALE STIMATA: € 85.000 – € 150.000</span>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <div class="nota">Audit passivo su fonti pubbliche. Nessun sistema violato. Dati intimi/familiari/sanitari esclusi per policy. <b>Caso dimostrativo, dati fittizi.</b></div>
+    <div>Pag. 1/1 · AUD</div>
+  </footer>
+</div>
+
+<!-- ================= FOGLIO 2 — CFO ================= -->
+<div class="foglio">
+  <div class="filigrana"><span>CASO DIMOSTRATIVO<br>DATI FITTIZI</span></div>
+  <div class="demo-bar">CASO DIMOSTRATIVO — AZIENDA, PERSONE E DATI INTERAMENTE FITTIZI — MERIDIANA COMPONENTI S.P.A.</div>
+  <div class="timbro">STRETTAMENTE CONFIDENZIALE<br>AD ESCLUSIVO USO DEL DESTINATARIO</div>
+
+  <header class="testata">
+    <div class="eyebrow">Operational Security Audit</div>
+    <h1>Digital Footprint &amp; Threat Exposure
+      <span class="sub">Esposizione informativa pubblica — figura apicale</span>
+    </h1>
+  </header>
+
+  <div class="scheda-id">
+    <div><b>TARGET PROFILE</b> Direttore Finanziario — M. Vinci</div>
+    <div><b>CODICE ASSET</b> TARGET-02 / CFO</div>
+    <div><b>DATA RILIEVO</b> 21 ottobre 2026</div>
+    <div><b>LIVELLO ESPOSIZIONE</b> <span class="liv-critico">ALTO</span></div>
+    <div><b>STATO</b> CLASSIFICATO AD USO INTERNO</div>
+  </div>
+
+  <section class="griglia">
+    <div class="q">
+      <div class="q-tit"><span class="n">1.</span> Identity &amp; Exposure Summary</div>
+      <ul>
+        <li><span class="et">Email aziendale:</span> <span class="mono">m.vinci@meridiana-componenti.it</span>.</li>
+        <li><span class="et">Account terzi:</span> mail aziendale usata per registrazione a portali fiscali e newsletter di settore.</li>
+        <li><span class="et">Data breach storici:</span> credenziale aziendale in un leak di un portale fiscale — password <span class="mono">M***n4$</span> <em>(mascherata)</em>.</li>
+        <li><span class="et">Profilo pubblico:</span> ruolo e seniority confermati da LinkedIn.</li>
+      </ul>
+    </div>
+    <div class="q">
+      <div class="q-tit"><span class="n">2.</span> Stack Applicativo Esposto</div>
+      <ul>
+        <li><span class="et">ERP/gestionale:</span> SAP Business One + TeamSystem, desunti da annuncio «addetto contabilità con conoscenza SAP B1».</li>
+        <li><span class="et">Istituti bancari:</span> due banche d'appoggio citate nella nota integrativa pubblica.</li>
+        <li><span class="et">Finestra contabile:</span> chiusure periodiche nei pressi di fine mese.</li>
+      </ul>
+    </div>
+    <div class="q">
+      <div class="q-tit"><span class="n">3.</span> Organigramma Amministrativo</div>
+      <ul>
+        <li><span class="et">Collaboratori:</span> 2 addetti contabilità che rispondono al CFO (da organigramma desunto).</li>
+        <li><span class="et">Flusso pagamenti:</span> mandati oltre soglia a doppia firma, ma la casistica «urgente via email» non è coperta da verifica fuori banda.</li>
+      </ul>
+    </div>
+    <div class="q vettore">
+      <div class="q-tit"><span class="n">4.</span> Vettore d'Attacco Potenziale</div>
+      <p class="vettore-tipo">Invoice Redirection + urgenza con audio deepfake</p>
+      <p class="vettore-scen">Un messaggio vocale generato con AI che imita l'AD, ricevuto venerdì a fine giornata, autorizza l'aggiornamento dell'IBAN di un fornitore strategico; la mail di supporto replica loghi e intestazione. Senza richiamo al numero storico in anagrafica, il bonifico parte.</p>
+      <span class="vettore-perdita">PERDITA POTENZIALE STIMATA: € 48.700</span>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <div class="nota">Audit passivo su fonti pubbliche. Nessun sistema violato. Dati intimi/familiari/sanitari esclusi per policy. <b>Caso dimostrativo, dati fittizi.</b></div>
+    <div>Pag. 1/1 · AUD</div>
+  </footer>
+</div>
+
+<!-- ================= FOGLIO 3 — ACQUISTI ================= -->
+<div class="foglio">
+  <div class="filigrana"><span>CASO DIMOSTRATIVO<br>DATI FITTIZI</span></div>
+  <div class="demo-bar">CASO DIMOSTRATIVO — AZIENDA, PERSONE E DATI INTERAMENTE FITTIZI — MERIDIANA COMPONENTI S.P.A.</div>
+  <div class="timbro">STRETTAMENTE CONFIDENZIALE<br>AD ESCLUSIVO USO DEL DESTINATARIO</div>
+
+  <header class="testata">
+    <div class="eyebrow">Operational Security Audit</div>
+    <h1>Digital Footprint &amp; Threat Exposure
+      <span class="sub">Esposizione informativa pubblica — figura apicale</span>
+    </h1>
+  </header>
+
+  <div class="scheda-id">
+    <div><b>TARGET PROFILE</b> Responsabile Acquisti — G. Serra</div>
+    <div><b>CODICE ASSET</b> TARGET-03 / PROCUREMENT</div>
+    <div><b>DATA RILIEVO</b> 21 ottobre 2026</div>
+    <div><b>LIVELLO ESPOSIZIONE</b> <span class="liv-critico">CRITICO</span></div>
+    <div><b>STATO</b> CLASSIFICATO AD USO INTERNO</div>
+  </div>
+
+  <section class="griglia">
+    <div class="q">
+      <div class="q-tit"><span class="n">1.</span> Identità &amp; Contatti Esterni</div>
+      <ul>
+        <li><span class="et">Email diretta:</span> <span class="mono">g.serra@meridiana-componenti.it</span> su portale fornitori.</li>
+        <li><span class="et">Recapiti:</span> telefono diretto su elenco fornitori pubblico.</li>
+        <li><span class="et">Presenza:</span> relatrice a un convegno pubblico di supply chain management.</li>
+      </ul>
+    </div>
+    <div class="q">
+      <div class="q-tit"><span class="n">2.</span> Mappatura Fornitori Strategici</div>
+      <ul>
+        <li><span class="et">Fornitore A:</span> <em>Tecnopress S.r.l.</em> — citata in un case study pubblicato («nostro cliente dal 2019»).</li>
+        <li><span class="et">Fornitore B:</span> <em>Rettifiche Lombarde</em> — post pubblico di consegna impianti.</li>
+        <li><span class="et">Fornitore C:</span> <em>ForgiaSud S.p.A.</em> — partnership citata in comunicato.</li>
+      </ul>
+    </div>
+    <div class="q">
+      <div class="q-tit"><span class="n">3.</span> Flusso Documentale in Ingresso</div>
+      <ul>
+        <li><span class="et">Volume:</span> ~40 tra preventivi e listini ricevuti dall'esterno a settimana.</li>
+        <li><span class="et">Percorso di rete:</span> metadati di un capitolato pubblico rivelano <span class="mono">\\SRV-FILE\Acquisti\Listini2024\</span>.</li>
+        <li><span class="et">Formati:</span> PDF ed Excel aperti di routine.</li>
+      </ul>
+    </div>
+    <div class="q vettore">
+      <div class="q-tit"><span class="n">4.</span> Vettore d'Attacco Potenziale</div>
+      <p class="vettore-tipo">Vendor Email Compromise via dominio typosquattato</p>
+      <p class="vettore-scen">Registrato un dominio simile a quello di un fornitore reale (es. una lettera variata), arriva una fattura per una commessa in corso con coordinate bancarie modificate per «cambio istituto d'appoggio». Inoltrata all'amministrazione senza controllo fuori banda, valida inconsapevolmente la frode.</p>
+      <span class="vettore-perdita">PERDITA POTENZIALE STIMATA: € 62.000</span>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <div class="nota">Audit passivo su fonti pubbliche. Nessun sistema violato. Dati intimi/familiari/sanitari esclusi per policy. <b>Caso dimostrativo, dati fittizi.</b></div>
+    <div>Pag. 1/1 · AUD</div>
+  </footer>
+</div>
+
+<!-- ================= FOGLIO 4 — HR ================= -->
+<div class="foglio">
+  <div class="filigrana"><span>CASO DIMOSTRATIVO<br>DATI FITTIZI</span></div>
+  <div class="demo-bar">CASO DIMOSTRATIVO — AZIENDA, PERSONE E DATI INTERAMENTE FITTIZI — MERIDIANA COMPONENTI S.P.A.</div>
+  <div class="timbro">STRETTAMENTE CONFIDENZIALE<br>AD ESCLUSIVO USO DEL DESTINATARIO</div>
+
+  <header class="testata">
+    <div class="eyebrow">Operational Security Audit</div>
+    <h1>Digital Footprint &amp; Threat Exposure
+      <span class="sub">Esposizione informativa pubblica — figura apicale</span>
+    </h1>
+  </header>
+
+  <div class="scheda-id">
+    <div><b>TARGET PROFILE</b> Responsabile Risorse Umane — D. Conti</div>
+    <div><b>CODICE ASSET</b> TARGET-04 / HR</div>
+    <div><b>DATA RILIEVO</b> 21 ottobre 2026</div>
+    <div><b>LIVELLO ESPOSIZIONE</b> <span class="liv-critico">ELEVATO</span></div>
+    <div><b>STATO</b> CLASSIFICATO AD USO INTERNO</div>
+  </div>
+
+  <section class="griglia">
+    <div class="q">
+      <div class="q-tit"><span class="n">1.</span> Identità &amp; Presenza Reclutamento</div>
+      <ul>
+        <li><span class="et">Email dirette:</span> <span class="mono">recruiting@meridiana-componenti.it</span> e <span class="mono">d.conti@…</span> nella sezione «Lavora con noi».</li>
+        <li><span class="et">Rete:</span> collegamenti pubblici con agenzie interinali e 2 università.</li>
+        <li><span class="et">Profilo:</span> ruolo confermato da LinkedIn e annunci di selezione.</li>
+      </ul>
+    </div>
+    <div class="q">
+      <div class="q-tit"><span class="n">2.</span> Canale Allegati Non Filtrato</div>
+      <ul>
+        <li><span class="et">Ricezione CV:</span> casella ordinaria senza ambiente di isolamento/sandbox.</li>
+        <li><span class="et">Formati aperti:</span> <span class="mono">.pdf .docx .zip</span> aperti di routine sui PC dell'ufficio.</li>
+        <li><span class="et">Volume:</span> flusso continuo di allegati da mittenti sconosciuti.</li>
+      </ul>
+    </div>
+    <div class="q">
+      <div class="q-tit"><span class="n">3.</span> Dati di Organizzazione Interna</div>
+      <ul>
+        <li><span class="et">Organigramma:</span> struttura gerarchica desumibile dagli annunci.</li>
+        <li><span class="et">Posizioni vacanti:</span> 5 ricerche aperte in produzione (indizio di reparto sottodimensionato).</li>
+        <li><span class="et">Consulenti:</span> studio paghe esterno citato pubblicamente.</li>
+      </ul>
+    </div>
+    <div class="q vettore">
+      <div class="q-tit"><span class="n">4.</span> Vettore d'Attacco Potenziale</div>
+      <p class="vettore-tipo">Accesso iniziale via CV infetto (infostealer)</p>
+      <p class="vettore-scen">Un finto candidato invia un CV per la posizione di contabile con un allegato malevolo. All'apertura, il computer HR viene compromesso: l'accesso iniziale apre la strada al furto delle credenziali e alla sorveglianza delle comunicazioni interne — l'anello che abilita gli altri tre scenari.</p>
+      <span class="vettore-perdita">PERDITA POTENZIALE: accesso iniziale → abilita gli scenari CEO/CFO/Acquisti</span>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <div class="nota">Audit passivo su fonti pubbliche. Nessun sistema violato. Dati intimi/familiari/sanitari esclusi per policy. <b>Caso dimostrativo, dati fittizi.</b></div>
+    <div>Pag. 1/1 · AUD</div>
+  </footer>
+</div>
+
+<div class="barra">
+  <button onclick="window.print()">Stampa / Salva come PDF (4 dossier)</button>
+</div>
+
+</body>
+</html>
